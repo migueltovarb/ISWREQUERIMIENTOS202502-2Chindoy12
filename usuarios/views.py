@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from .forms import RegistroForm, MascotaForm, CitaForm
 from .models import Perfil, Mascota, Cita, HistorialMedico, Vacuna
+from .utils import role_required, roles_required
 from django.contrib import messages
 
 # ---------------------------
@@ -98,6 +100,9 @@ def lista_citas(request):
 
 @login_required
 def crear_cita(request):
+    # Solo clientes pueden crear citas (o staff)
+    if request.user.perfil.rol != 'cliente' and not request.user.is_staff:
+        return HttpResponseForbidden('Solo clientes pueden agendar citas')
     if request.method == 'POST':
         form = CitaForm(request.POST)
         if form.is_valid():
