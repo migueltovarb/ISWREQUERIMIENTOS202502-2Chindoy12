@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Mascota, Cita
 
 class RegistroForm(forms.ModelForm):
     username = forms.CharField(
@@ -35,3 +36,22 @@ class RegistroForm(forms.ModelForm):
         if p1 != p2:
             raise forms.ValidationError("Las contraseñas no coinciden")
         return datos
+
+
+class MascotaForm(forms.ModelForm):
+    class Meta:
+        model = Mascota
+        fields = ['nombre', 'especie', 'raza', 'fecha_nacimiento', 'sexo', 'peso_kg']
+        widgets = {
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+
+class CitaForm(forms.ModelForm):
+    class Meta:
+        model = Cita
+        fields = ['mascota', 'veterinario', 'fecha_inicio', 'fecha_fin', 'tipo', 'motivo']
+        widgets = {
+            'fecha_inicio': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'fecha_fin': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
