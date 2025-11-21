@@ -68,7 +68,6 @@ def dashboard_admin(request):
     usuarios = Perfil.objects.all()
     return render(request, "dash_admin.html", {"usuarios": usuarios})
 
-
 # ---------------------------
 # Cambiar ROL (admin)
 # ---------------------------
