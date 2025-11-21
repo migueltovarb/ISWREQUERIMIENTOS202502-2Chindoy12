@@ -1,40 +1,81 @@
-from django.views.generic import FormView
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.contrib.auth.views import LoginView
 from .forms import RegistroForm
+from .models import Perfil
 
-class RegistroView(FormView):
-    template_name = "registro.html"
-    form_class = RegistroForm
-    success_url = reverse_lazy("login")
+# ---------------------------
+# Registro con LOGIN automático
+# ---------------------------
+def registro(request):
+    if request.method == "POST":
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            user.save()
 
-    def form_valid(self, form):
-        usuario = User.objects.create_user(
-            username=form.cleaned_data["username"],
-            email=form.cleaned_data["email"],
-            password=form.cleaned_data["password"]
-        )
+            perfil = Perfil.objects.create(user=user)
 
-        # Email de bienvenida
-        mensaje = f"""
-Hola {usuario.username},
+            # Iniciar sesión
+            usuario = authenticate(username=user.username, password=form.cleaned_data["password"])
+            login(request, usuario)
 
-¡Bienvenido a la Veterinaria!
+            return redirect("dashboard")
+    else:
+        form = RegistroForm()
+    return render(request, "registro.html", {"form": form})
 
-Tu registro se completó correctamente.
-"""
-        send_mail(
-            subject="Registro exitoso - Veterinaria",
-            message=mensaje,
-            from_email="veterinaria@gmail.com",
-            recipient_list=[usuario.email],
-            fail_silently=False,
-        )
+# ---------------------------
+# Dashboard general
+# ---------------------------
+@login_required
+def dashboard(request):
+    rol = request.user.perfil.rol
 
-        return super().form_valid(form)
+    if request.user.is_staff:
+        return redirect("dashboard_admin")
+
+    if rol == "veterinario":
+        return redirect("dashboard_veterinario")
+
+    return redirect("dashboard_cliente")
 
 
-class LoginUsuario(LoginView):
-    template_name = "login.html"
+# ---------------------------
+# Dashboard CLIENTE
+# ---------------------------
+@login_required
+def dashboard_cliente(request):
+    return render(request, "dash_cliente.html")
+
+
+# ---------------------------
+# Dashboard VETERINARIO
+# ---------------------------
+@login_required
+def dashboard_veterinario(request):
+    return render(request, "dash_veterinario.html")
+
+
+# ---------------------------
+# Dashboard ADMIN
+# ---------------------------
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def dashboard_admin(request):
+    usuarios = Perfil.objects.all()
+    return render(request, "dash_admin.html", {"usuarios": usuarios})
+
+
+# ---------------------------
+# Cambiar ROL (admin)
+# ---------------------------
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def cambiar_rol(request, id, nuevo_rol):
+    perfil = Perfil.objects.get(id=id)
+    perfil.rol = nuevo_rol
+    perfil.save()
+    return redirect("dashboard_admin")
