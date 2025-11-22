@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #2e7d32;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; font-family: Arial;
+        }
+        .box {
+            background: #0277bd; padding: 30px; width: 350px;
+            border-radius: 12px; color: white;
+        }
+        input, button {
+            width: 100%; padding: 10px; margin-top: 10px;
+        }
+        button {
+            background: #01579b; border: none; color: white;
+            border-radius: 5px;
+        }
+        a { color: yellow; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Iniciar Sesión</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Entrar</button>
+        </form>
+
+        <p>¿No tienes cuenta? <a href="/registro/">Regístrate aquí</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<h1>Panel de Administrador</h1>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Usuario</th>
+        <th>Rol</th>
+        <th>Acción</th>
+    </tr>
+
+    {% for perfil in usuarios %}
+    <tr>
+        <td>{{ perfil.user.username }}</td>
+        <td>{{ perfil.rol }}</td>
+        <td>
+            {% if perfil.rol == "cliente" %}
+                <a href="/cambiar-rol/{{ perfil.id }}/veterinario/">Cambiar a Veterinario</a>
+            {% else %}
+                <a href="/cambiar-rol/{{ perfil.id }}/cliente/">Cambiar a Cliente</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>

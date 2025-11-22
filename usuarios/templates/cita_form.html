@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Programar cita</title>
+    <style>
+        body { background: #eaf8f0; font-family: Arial }
+        .contenedor { width: 600px; margin: 40px auto; background: white; padding: 20px; border-radius: 8px }
+        button { background: #2ea86b; color: white; padding: 10px 14px; border: none; border-radius: 6px }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h2>{% if editar %}Editar cita{% else %}Programar cita{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% if editar %}Actualizar{% else %}Programar{% endif %}</button>
+        </form>
+    </div>
+</body>
+</html>

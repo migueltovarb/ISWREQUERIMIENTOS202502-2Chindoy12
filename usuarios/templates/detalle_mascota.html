@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Detalle mascota</title>
+    <style>
+        body { background: #e8f4ff; font-family: Arial }
+        .contenedor { width: 720px; margin: 30px auto; background:white; padding:18px; border-radius:8px }
+        ul { list-style:none; padding:0 }
+        li { padding:6px 0 }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h2>{{ mascota.nombre }}</h2>
+        <p><strong>Especie:</strong> {{ mascota.especie }} - <strong>Raza:</strong> {{ mascota.raza }}</p>
+        <p><strong>Nacimiento:</strong> {{ mascota.fecha_nacimiento }} - <strong>Peso:</strong> {{ mascota.peso_kg }} kg</p>
+        <h3>Historial médico</h3>
+        <ul>
+            {% for h in historiales %}
+                <li><strong>{{ h.fecha.date }}</strong> - {{ h.descripcion|truncatechars:120 }}</li>
+            {% empty %}
+                <li>No hay registros aún.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
