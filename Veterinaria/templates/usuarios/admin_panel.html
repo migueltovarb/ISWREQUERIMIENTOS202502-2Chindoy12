@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración - Usuarios</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">Veterinaria</div>
+    <nav class="nav">
+      <a href="{% url 'admin_panel' %}">Usuarios</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    </nav>
+  </div>
+  <div class="container">
+    <h2>Usuarios registrados</h2>
+    <table>
+      <tr><th>Usuario</th><th>Email</th><th>Rol</th><th>Acción</th></tr>
+      {% for u in tabla %}
+      <tr>
+        <td>{{ u.username }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.rol|title }}</td>
+        <td>
+          <form method="post">{% csrf_token %}
+            <input type="hidden" name="perfil_id" value="{{ u.id }}">
+            <button name="nuevo_rol" value="veterinario" class="btn">Hacer veterinario</button>
+            <button name="nuevo_rol" value="cliente" class="btn" style="background:var(--accent)">Hacer cliente</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

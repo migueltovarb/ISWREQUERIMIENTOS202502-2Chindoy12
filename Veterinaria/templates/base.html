@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veterinaria</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/usuarios.css">
+  </head>
+  <body class="light">
+    <header class="topbar">
+      <h1>Veterinaria</h1>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <button id="darkModeToggle" class="darkmode-fab" title="Modo oscuro">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="16" fill="#2d8fc7"/>
+        <path d="M21.5 16.5C21.5 20.09 18.59 23 15 23C13.67 23 12.43 22.59 11.41 21.87C14.13 21.87 16.37 19.63 16.37 16.91C16.37 14.19 14.13 11.95 11.41 11.95C12.43 11.23 13.67 10.82 15 10.82C18.59 10.82 21.5 13.73 21.5 16.5Z" fill="#fff"/>
+      </svg>
+    </button>
+    <script src="/static/js/darkmode.js"></script>
+  </body>
+  </html>

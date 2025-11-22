@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Certificados</h2>
+  {% if request.user.role == 'vet' %}
+    <p><a href="{% url 'emit_certificate' %}">Emitir certificado</a></p>
+  {% endif %}
+  <ul>
+    {% for c in certificates %}
+      <li>{{ c.pet.name }} - {{ c.client_name }} - {{ c.issued_at }} - Veterinario: {% if c.veterinarian %}{{ c.veterinarian.username }}{% else %}Sin asignar{% endif %}</li>
+    {% empty %}
+      <li>No hay certificados</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-box">
+    <h2 class="auth-title">Iniciar sesión</h2>
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label>Usuario</label>
+      <input type="text" name="username" required />
+      <label>Contraseña</label>
+      <input type="password" name="password" required />
+      <button type="submit">Entrar</button>
+    </form>
+    <p class="muted">No tienes cuenta? <a href="{% url 'register' %}">Regístrate aquí</a></p>
+  </div>
+</div>
+{% endblock %}

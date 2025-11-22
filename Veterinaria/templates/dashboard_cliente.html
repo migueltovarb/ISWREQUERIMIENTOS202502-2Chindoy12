@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Cliente</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+  <div class="topbar">
+    <div><strong>Veterinaria</strong></div>
+    <nav class="nav">
+      <a href="{% url 'dashboard_cliente' %}">Inicio</a>
+      <a href="#">Mascotas</a>
+      <a href="#">Citas</a>
+      <a href="#">Perfil</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    </nav>
+  </div>
+  <div class="container">
+    <h2 style="color:var(--primary)">Bienvenido cliente 👤</h2>
+    <div class="cards">
+      <a class="card" href="{% url 'mis_mascotas' %}"><span class="icon">🐾</span>Mis Mascotas</a>
+      <a class="card" href="{% url 'agendar_cita' %}"><span class="icon">📅</span>Agendar Cita</a>
+      <a class="card" href="{% url 'historial_citas' %}"><span class="icon">🗂️</span>Historial de Citas</a>
+      <a class="card" href="{% url 'mis_certificados' %}"><span class="icon">📄</span>Certificados</a>
+    </div>
+  </div>
+</body>
+</html>

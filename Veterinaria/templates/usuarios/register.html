@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-box">
+    <h2 class="auth-title">Registro</h2>
+    {% if form.errors %}
+      <div class="error">
+        {% for field, errors in form.errors.items %}
+          {% for e in errors %} <div>{{ e }}</div> {% endfor %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label>Nombre</label>
+      <input type="text" name="username" value="{{ request.POST.username }}" />
+      <label>Correo</label>
+      <input type="email" name="email" value="{{ request.POST.email }}" required />
+      <label>Contraseña</label>
+      <input type="password" name="password1" required />
+      <label>Confirmar Contraseña</label>
+      <input type="password" name="password2" required />
+      <button type="submit">Registrar</button>
+    </form>
+    <p class="muted">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+  </div>
+</div>
+{% endblock %}

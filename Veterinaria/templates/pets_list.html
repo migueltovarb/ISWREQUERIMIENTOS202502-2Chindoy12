@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Mis mascotas</h2>
+  <p><a href="{% url 'pet_create' %}">Registrar nueva mascota</a></p>
+  <ul>
+    {% for p in pets %}
+      <li>{{ p.name }} - {{ p.species }} - {{ p.breed }}</li>
+    {% empty %}
+      <li>No tienes mascotas registradas</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

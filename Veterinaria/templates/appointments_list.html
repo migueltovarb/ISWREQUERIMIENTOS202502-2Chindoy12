@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Mis citas</h2>
+  <p><a href="{% url 'schedule_appointment' %}">Agendar nueva cita</a></p>
+  <ul>
+    {% for a in appointments %}
+      <li>{{ a.pet.name }} - {{ a.type }} - {{ a.start }} - Veterinario: {% if a.veterinarian %}{{ a.veterinarian.username }}{% else %}Sin asignar{% endif %}</li>
+    {% empty %}
+      <li>No hay citas</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

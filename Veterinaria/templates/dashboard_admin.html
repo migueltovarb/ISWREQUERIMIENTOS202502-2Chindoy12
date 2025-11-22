@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+  <div class="topbar">
+    <div><strong>Veterinaria</strong></div>
+    <nav class="nav">
+      <a href="{% url 'dashboard_admin' %}">Inicio</a>
+      <a href="#">Usuarios</a>
+      <a href="#">Citas</a>
+      <a href="#">Perfil</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    </nav>
+  </div>
+  <div class="container">
+    <h2 style="color:var(--primary)">Usuarios registrados</h2>
+    <table>
+      <tr><th>Usuario</th><th>Email</th><th>Rol</th><th>Cambiar rol</th></tr>
+      {% for u in tabla %}
+      <tr>
+        <td>{{ u.username }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.rol|title }}</td>
+        <td>
+          <form method="post" style="display:inline">{% csrf_token %}
+            <input type="hidden" name="perfil_id" value="{{ u.id }}" />
+            <button name="nuevo_rol" value="veterinario" class="btn">Cambiar a veterinario</button>
+            <button name="nuevo_rol" value="cliente" class="btn" style="background:var(--accent)">Cambiar a cliente</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

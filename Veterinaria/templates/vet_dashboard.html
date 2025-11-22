@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2 style="color:var(--primary);margin-bottom:18px">Panel Veterinario</h2>
+  <div class="grid">
+    <a class="card" href="{% url 'dashboard' %}"><span>🏠</span> Inicio</a>
+    <a class="card" href="{% url 'my_appointments' %}"><span>📅</span> Citas programadas</a>
+    <a class="card" href="{% url 'my_appointments' %}"><span>🗂️</span> Historial clínico</a>
+    <a class="card" href="{% url 'my_pets' %}"><span>🐾</span> Mascotas</a>
+    <a class="card" href="{% url 'emit_certificate' %}"><span>📄</span> Emitir certificados</a>
+  </div>
+
+  <h3 style="color:var(--accent);margin-top:32px">Próximas citas</h3>
+  <ul>
+    {% for a in appointments %}
+      <li><strong>{{ a.pet.name }}</strong> - {{ a.type }} - <span style="color:var(--primary)">{{ a.start }}</span></li>
+    {% empty %}
+      <li>No hay citas próximas</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

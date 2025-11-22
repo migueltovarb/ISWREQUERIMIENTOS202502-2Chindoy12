@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Veterinario</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+  <div class="topbar">
+    <div><strong>Veterinaria</strong></div>
+    <nav class="nav">
+      <a href="{% url 'dashboard_veterinario' %}">Inicio</a>
+      <a href="#">Citas</a>
+      <a href="#">Historial Clínico</a>
+      <a href="#">Perfil</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    </nav>
+  </div>
+  <div class="container">
+    <h2 style="color:var(--primary)">Bienvenido veterinario 🩺</h2>
+    <div class="cards">
+      <a class="card" href="{% url 'citas_programadas' %}"><span class="icon">📅</span>Citas Programadas</a>
+      <a class="card" href="{% url 'historial_clinico' %}"><span class="icon">🗂️</span>Historial Clínico</a>
+      <a class="card" href="{% url 'mascotas_vet' %}"><span class="icon">🐾</span>Mascotas</a>
+      <a class="card" href="{% url 'emitir_certificado' %}"><span class="icon">📄</span>Emitir Certificados</a>
+    </div>
+  </div>
+</body>
+</html>

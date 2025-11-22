@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de Citas</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+  <div class="topbar">
+    <div><strong>Veterinaria</strong></div>
+    <nav class="nav">
+      <a href="{% url 'dashboard_cliente' %}">Inicio</a>
+      <a href="{% url 'mis_mascotas' %}">Mascotas</a>
+      <a href="{% url 'agendar_cita' %}">Citas</a>
+      <a href="{% url 'historial_citas' %}">Historial</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    </nav>
+  </div>
+  <div class="container">
+    <h2 style="color:var(--primary)">Historial de Citas</h2>
+    <div class="card">Aquí aparecerá el historial de tus citas.</div>
+  </div>
+</body>
+</html>

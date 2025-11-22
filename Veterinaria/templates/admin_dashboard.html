@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2 style="color:var(--primary);margin-bottom:18px">Panel Administrador</h2>
+  <div class="grid">
+    <a class="card" href="{% url 'admin_users_manage' %}"><span>👥</span> Clientes / Veterinarios</a>
+    <a class="card" href="{% url 'certificates_list' %}"><span>📄</span> Certificados</a>
+    <a class="card" href="{% url 'admin_appointments_view' %}"><span>📅</span> Citas</a>
+  </div>
+
+  <div style="margin-top:32px">
+    <p style="color:var(--primary)"><strong>Usuarios:</strong> {{ clients }} clientes, {{ vets }} veterinarios</p>
+    <p style="color:var(--accent)"><strong>Total certificados:</strong> {{ total_certs }}</p>
+  </div>
+</div>
+{% endblock %}

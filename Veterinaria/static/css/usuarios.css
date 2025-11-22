@@ -1,0 +1,9 @@
+/* Usuarios app specific styles - small enhancements */
+.auth-page{min-height:calc(100vh - 80px);display:flex;align-items:center;justify-content:center;padding:24px}
+.auth-box{width:100%;max-width:440px;background:var(--card);border-radius:12px;padding:28px 24px;box-shadow:var(--card-shadow);border:var(--card-border)}
+.auth-title{margin:0 0 12px 0;color:var(--primary);text-align:center}
+.auth-box form{display:block}
+.auth-box label{font-weight:600;font-size:0.95rem}
+.auth-box p.muted{margin-top:12px;text-align:center;color:#567}
+.error{color:#a00;padding:8px;margin-bottom:10px}
+.btn{margin:0 6px}

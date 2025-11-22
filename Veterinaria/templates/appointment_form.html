@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Agendar cita</h2>
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Agendar</button>
+  </form>
+</div>
+{% endblock %}

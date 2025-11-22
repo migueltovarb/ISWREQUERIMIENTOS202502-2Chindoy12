@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Citas (Admin)</h2>
+  <form method="get">
+    <label>Año</label><input type="number" name="year" />
+    <label>Mes</label><input type="number" name="month" min="1" max="12" />
+    <label>Día</label><input type="number" name="day" min="1" max="31" />
+    <button type="submit">Filtrar</button>
+  </form>
+  <ul>
+    {% for a in appointments %}
+      <li>{{ a.start }} - {{ a.pet.name }} - {{ a.type }} - Veterinario: {{ a.veterinarian.username if a.veterinarian }}</li>
+    {% empty %}
+      <li>No hay citas</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
